@@ -31,6 +31,37 @@
           <version>${jettyVersion}</version>
           <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-webapp -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jboss.weld.servlet/weld-servlet -->
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-core</artifactId>
+            <version>2.4.5.Final</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.el/el-api -->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>el-api</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.web/el-impl -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>el-impl</artifactId>
+            <version>2.2</version>
+        </dependency>
     </dependencies>
     <!-- build>
         <finalName>websocketer</finalName>
@@ -48,6 +79,27 @@
             <mainClass>com.ari.websocketer.server.SimplestServer</mainClass>
           </configuration>
         </plugin>
+        <!-- with this plugin we make jar with dependencies. Without this maven dependencies are not added to the jar
+            dependencies are added with package phase.
+        -->
+          <plugin>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <version>3.1.0</version>
+              <configuration>
+                  <descriptorRefs>
+                      <descriptorRef>jar-with-dependencies</descriptorRef>
+                  </descriptorRefs>
+              </configuration>
+              <executions>
+                  <execution>
+                      <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                      <phase>package</phase> <!-- bind to the packaging phase -->
+                      <goals>
+                          <goal>single</goal><!-- remember, that all resourcess to be included must exists when this single is called (here it is called in package phase -->
+                      </goals>
+                  </execution>
+              </executions>
+          </plugin>
       </plugins>
     </build>
 </project>
