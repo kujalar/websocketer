@@ -4,9 +4,12 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.jboss.weld.environment.servlet.Listener;
 
+import javax.enterprise.context.RequestScoped;
+
 /**
  * The simplest possible Jetty server.
  */
+@RequestScoped
 public class SimplestServer
 {
     public static void main( String[] args ) throws Exception
